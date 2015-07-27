@@ -25,7 +25,6 @@ var async     = require('async');
 var csv       = require('node-csv');
 var Stream    = require('stream');
 var humanize  = require('humanize');
-var microtime = require('microtime');
 var Sifter    = require('../lib/sifter');
 var highlight = function(obj) { return cardinal.highlight(JSON.stringify(obj), {json: true}); };
 
@@ -107,14 +106,14 @@ var step_sift = function(callback) {
 		direction: argv.direction
 	}];
 
-	t_start = microtime.now();
+	t_start = +new Date();
 	result = sifter.search(argv.query, {
 		fields : argv.fields.split(','),
 		limit  : argv.limit,
 		sort   : sort
 	});
 
-	t_end = microtime.now();
+	t_end = +new Date();
 	callback();
 };
 
